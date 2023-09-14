@@ -107,5 +107,4 @@ def main():
             listings = listings + arr
     
     # Return final list with all cities
-    print(f'Returning {len(listings)} listings')
     return listings
