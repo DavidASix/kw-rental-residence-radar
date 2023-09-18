@@ -44,15 +44,13 @@ def formatListings(listings, city):
 def main(): 
     output_listings = []
     cities = ['kitchener', 'waterloo']
-    for city in cities:
+    for i, city in enumerate(cities):
         # Set up city scoped variables
         url = makeUrl(city)
-        print(url)
         # Create a session to persist cookies
         session = requests.Session()
         try:
             res = requests.get(url , headers=headers)
-            print(res)
             response = res.json()
             
         except Exception as e:
@@ -69,6 +67,9 @@ def main():
 
         # Consolidate listings from all pages to single array
         output_listings = output_listings + formatted
+        
+        if i == len(cities) - 1:
+            continue
         
         # Waiting between requests as to not impact server or incur rate limiting
         for i in range(5):
