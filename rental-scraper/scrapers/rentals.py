@@ -21,7 +21,7 @@ def formatListings(listings, city):
         url = li.get('url', None)
         listing_id = li.get('id', None)
         # Get Title
-        title = li.get('name', None)
+        title = li.get('name', None) or li.get('address1', None)
         # Get listings location
         loc = city
         # Get image location
