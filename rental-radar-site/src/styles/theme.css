@@ -1,0 +1,17 @@
+:root {
+  --nav-height: 70px;
+  --primary: #477a62;
+  --secondary: #a5bb85;
+  --fg: #252525;
+  --fg-muted: #666666;
+  --background: #F8f8f8;
+  --modal-bg: #eeeeee;
+}
+
+/*
+[data-theme="dark"] {
+}
+
+[data-theme="light"] {
+}
+*/
