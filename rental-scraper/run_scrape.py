@@ -3,8 +3,8 @@ from pprint import pprint
 import scrapers.kijiji as kijiji
 import scrapers.kwproperty as kwproperty
 import scrapers.rentals as rentals
-import firebase_functions as firebase
-import twilio_functions as twilio
+import firebase_utils as firebase
+import twilio_utils as twilio
 
 home_url = 'https://www.test.com'
 
@@ -40,6 +40,5 @@ def main():
     print(message_text, '\n\n')
 
     twilio.send_text(message_text)
-    
-if __name__ == "__main__":
-    main()
+
+main()
