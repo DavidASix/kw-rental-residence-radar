@@ -50,3 +50,13 @@ def import_all_listings(listings):
     print('Attempting to import', len(listings), 'listings.')
     for l in listings:
         listings_collection.add(l)
+
+def delete_listings_from_source(source):
+    db = firebase_conn()
+    listings_collection = db.collection("listings")
+    query = listings_collection.where("source", "==", source)
+    listings = query.stream()
+    print('Deleting', len(query.get()), 'listings.')
+    for l in listings:
+        l.reference.delete()
+    print('Complete')
