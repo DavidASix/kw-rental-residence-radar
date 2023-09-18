@@ -1,10 +1,16 @@
 import os
-import json
+import warnings
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
 base_path = os.path.dirname(__file__)
+
+# Filter to ignore firebase filter warning.
+warnings.filterwarnings(
+    "ignore", 
+    category=UserWarning, 
+    message="Detected filter using positional arguments. Prefer using the 'filter' keyword argument instead.")
 
 def firebase_conn():
     # Initialize Firebase Connection
