@@ -39,7 +39,6 @@ def import_new_listings(listings):
     for l in listings:
         l_in_collection = listing_in_collection(l, listings_collection)
         if not l_in_collection:
-            print("Adding new listing")
             listings_collection.add(l)
             new_listings.append(l)
     return new_listings
