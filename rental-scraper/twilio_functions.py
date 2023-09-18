@@ -14,11 +14,13 @@ with open(secret_path, "r") as f:
     to_numbers =  secrets['to']
 
 def send_text():
-    print('Sending text')
+    print('Sending Twilio Text')
     client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        to=to_numbers, 
-        from_=from_number,
-        body="Hello from Python!")
-    print('Text sent')
-    print(message.sid)
+    try:
+        message = client.messages.create(
+            to=to_numbers, 
+            from_=from_number,
+            body="Hello from Python!")
+        print('Text Sent. SID:', message.sid)
+    except Exception as e:
+        print(e)
