@@ -1,7 +1,7 @@
 * {
   font-weight: 400;
   font-size: inherit;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Martel Sans', sans-serif;
   color: var(--fg);
 }
 
@@ -9,15 +9,19 @@ html, body {
   margin: 0px;
   padding: 0px;
   height: 100%;
-  background-color: var(--background);
+  background-color: 'var(--white)';
 }
 
 h1 {
-  font-family: 'Baron Neue', sans-serif;
+  font-family: 'Bungee', cursive;
 }
 
 .headerFont {
-  font-family: 'Baron Neue', sans-serif;
+  font-family: 'Bungee', cursive;
+}
+.heavyFont {
+  font-family: 'Martel Sans', sans-serif;
+  font-weight: 900;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,3 +37,6 @@ a {
 a:hover {
   color: var(--fg);
 }
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.025); }
