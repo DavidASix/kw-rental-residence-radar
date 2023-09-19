@@ -84,7 +84,6 @@
 }
 
 .maxSection {
-  background-color: var(--background);
   min-height: calc(100vh - 120px);
   padding-top: var(--nav-height);
   width: 100%;
