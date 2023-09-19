@@ -5,12 +5,12 @@ import s from "./Footer.module.css";
 
 export default function Footer() {
   return (
-      <div className={`container-fluid p-0 m-0 mt-3 ${s.footer} row ${cs.center}`}>
+      <div className={`container-fluid p-0 m-0 mt-3 ${s.footer} row ${cs.center} bg-white`}>
         <div className="col-11 col-md-10 d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
           <div className="col-md-8 d-flex align-items-center">
             <a
               href="/"
-              className={`d-md-flex d-none`}
+              className={`d-md-flex d-none me-2`}
               style={{ height: 25, width: 25}}
             >
               <img
