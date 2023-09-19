@@ -1,7 +1,7 @@
 {
   "functions": [
     {
-      "source": "functions",
+      "source": "source",
       "codebase": "default",
       "ignore": [
         "venv",
