@@ -15,7 +15,10 @@ warnings.filterwarnings(
 def firebase_conn():
     # Initialize Firebase Connection
     cred = credentials.Certificate(os.path.join(base_path, '../private/service-account.json'))
-    app = firebase_admin.initialize_app(cred)
+    if not firebase_admin._apps:
+        app = firebase_admin.initialize_app(cred)
+    else:
+        app = firebase_admin.get_app(name='[DEFAULT]')
     db = firestore.client()
     print('Connected to Firebase')
     return db
