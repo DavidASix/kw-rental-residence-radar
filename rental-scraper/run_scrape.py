@@ -6,7 +6,7 @@ import scrapers.rentals as rentals
 import firebase_utils as firebase
 import twilio_utils as twilio
 
-home_url = 'https://www.test.com'
+home_url = 'https://kw-rental-residence-radar.web.app/'
 
 def main():
     print('Running Main')
