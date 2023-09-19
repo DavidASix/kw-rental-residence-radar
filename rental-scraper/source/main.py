@@ -1,14 +1,8 @@
-from firebase_functions import https_fn
+from firebase_functions import https_fn, scheduler_fn
 from firebase_admin import initialize_app
 import rental_scraper
 
 initialize_app()
-
-
-@https_fn.on_request()
-def on_request_example(req: https_fn.Request) -> https_fn.Response:
-    print('test')
-    return https_fn.Response("Hello world!")
 
 @https_fn.on_request()
 def execute_rental_scraper(req: https_fn.Request) -> https_fn.Response:
@@ -19,3 +13,7 @@ def execute_rental_scraper(req: https_fn.Request) -> https_fn.Response:
         print('Error happened')
         print(e)
         return https_fn.Response(str(e))
+
+@scheduler_fn.on_schedule(schedule="5 * * * *")
+def scheduled_rental_scraper(event: scheduler_fn.ScheduledEvent) -> None:
+    rental_scraper.main()
