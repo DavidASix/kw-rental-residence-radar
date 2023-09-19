@@ -1,3 +1,3 @@
 const c = module.exports;
 
-c.siteName = "kw-rental-residence-radar"
+c.siteName = "KW Rental Residence Radar"
