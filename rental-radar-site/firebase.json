@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "kw-rental-residence-radar",
     "source": ".",
     "ignore": [
       "firebase.json",
@@ -8,7 +7,7 @@
       "**/node_modules/**"
     ],
     "frameworksBackend": {
-      "region": "us-central1"
+      "region": "us-east1"
     }
   }
 }
