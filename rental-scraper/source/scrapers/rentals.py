@@ -5,7 +5,13 @@ from pprint import pprint
 from datetime import datetime
 from time import sleep
 
-makeUrl = lambda city: f'https://rentals.ca/phoenix/api/v1.0.2/listings?beds[]=3&beds[]=4&rentrange=0-3000&types[]=house&types[]=town-house&types[]=multi-unit&types[]=cabin&types[]=cottage&obj_path={city}&details=mid2&prefer-neighbourhood=0&suppress-pagination=1&limit=1000'
+makeUrl = lambda city: (
+    f'https://rentals.ca/phoenix/api/v1.0.2/listings?'+
+    f'beds[]=3&beds[]=4&rentrange=0-3000&types[]=house&types[]=town-house&types[]=multi-unit'+
+    f'&types[]=cabin&types[]=cottage&obj_path={city}&details=mid2'+
+    f'&prefer-neighbourhood=0&limit=1000') 
+# Removed pagination supression  as it began causing an error
+#&suppress-pagination=1
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
@@ -51,10 +57,10 @@ def main():
         session = requests.Session()
         try:
             res = requests.get(url , headers=headers)
+            print(url)
             response = res.json()
-            
         except Exception as e:
-            print(e)
+            print('error requesting rentals.ca', e)
             raise e
         # Will return up to 1000 listings, pagination is disabled
         # KW under our params should never return over a thousand houses
