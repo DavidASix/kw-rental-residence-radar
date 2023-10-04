@@ -43,3 +43,6 @@ def main():
         twilio.send_text('Message Prep Error:' + str(e))
 
     twilio.send_text(message_text)
+
+if __name__ == '__main__':
+    main()
