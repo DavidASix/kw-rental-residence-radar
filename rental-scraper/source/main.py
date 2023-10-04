@@ -14,6 +14,6 @@ def execute_rental_scraper(req: https_fn.Request) -> https_fn.Response:
         print(e)
         return https_fn.Response(str(e))
 
-@scheduler_fn.on_schedule(schedule="*/5 8-23 * * *")
+@scheduler_fn.on_schedule(schedule="*/5 12-23,0-3 * * *")
 def scheduled_rental_scraper(event: scheduler_fn.ScheduledEvent) -> None:
     rental_scraper.main()
