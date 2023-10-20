@@ -6,6 +6,7 @@ export default function NavigationLayout({ children }) {
   return (
     <>
       <header>
+        <NavBar />
       </header>
       <main className={`d-flex flex-column p-0 justify-content-center align-items-center`}>
         {children}

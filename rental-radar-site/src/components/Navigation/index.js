@@ -1,48 +1,24 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import {BsInfoCircleFill, BsGearFill} from 'react-icons/bs';
+import {BiSolidLogIn, BiSolidLogOut} from 'react-icons/bi'
 
 import s from "./Navigation.module.css";
 import cs from "src/styles/common.module.css";
 
 export default function Navigation() {
-  const [theme, setTheme] = useState(null);
-  useEffect(() => {
-    // Check for existing theme set or user preference and set it
-    const docTheme = document.documentElement.getAttribute("data-theme");
-    const savedTheme = localStorage.getItem("theme");
-    const sysPref = window.matchMedia("(prefers-color-scheme: dark)").matches && 'dark';
-    const theme = savedTheme || sysPref || docTheme || 'light';
-    document.documentElement.setAttribute("data-theme", theme);
-    setTheme(theme);
-  }, []);
-
-  function changeTheme() {
-    if (typeof document === 'undefined') return;
-    const currentTheme = document.documentElement.getAttribute("data-theme") || theme;
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    setTheme(newTheme);
-  }
-
-  const oppTheme = theme === 'dark' ? 'light' : 'dark';
+  const router = useRouter()
+  console.log(router.asPath)
   return (
+    <>
       <div
-        className={`container-fluid fixed-top pt-3 align-items-center ${s.navSize} `}
+        className={`container-fluid align-items-center `}
       >
         <nav
-          className={`
-            navbar navbar-expand-lg 
-            navbar-light 
-            py-2 pe-3 ps-3 
-            rounded-4 shadow`}
-        >
-          <a className={`navbar-brand ${s.navItem}`} href="/">
-            Dave 6
-          </a>
+          className={`navbar navbar-expand-lg navbar-light pb-0`}>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler border m-1 w-100"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navBarContent"
@@ -52,34 +28,76 @@ export default function Navigation() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navBarContent">
-            <ul className="navbar-nav me-auto">
-              <li className="nav-item">
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/about">
-                  About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/blog">
-                  Personal Blog
-                </a>
-              </li>
-            </ul>
+          <div className="collapse navbar-collapse px-2" id="navBarContent">
+            <div className="navbar-nav me-auto" />
 
             <ul className="navbar-nav">
               <li className="nav-item">
-                <button className={`btn ${"btn-"+oppTheme}`} onClick={() => changeTheme()}>
-                  {oppTheme.charAt(0).toUpperCase() + oppTheme.slice(1)} Mode
+              {router.asPath !== '/' ? (
+                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/">
+                  <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} />
+                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                    Home
+                  </span>
+                </a>
+                ) : 
+                <button 
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#infoModal"
+                  style={{background: 'none', border: 'none'}}
+                  className={`nav-link grow ${s.navItem} ${cs.grow} w-100`} 
+                  >
+                  <BsInfoCircleFill size={25} className={`mx-2 d-lg-block d-none`} />
+                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                    Info
+                  </span>
                 </button>
+                }
+              </li>
+              <li className="nav-item">
+                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/settings">
+                  <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} />
+                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                    Settings
+                  </span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/login">
+                  <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} />
+                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                    Login
+                  </span>
+                </a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
+      <div className="modal fade" id="infoModal" tabIndex="-1" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="infoModal">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="modal-title">How does it work?</h2>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <h3 className='h4'>Concept</h3>
+              <p>KW Rental Radar (KWRR) is a project by David Anderson created initially to help him search for a new rental house. </p>
+              <p>This project solves the real world problem of Kitchener Waterloo’s housing market being extremely competitive. This tool allowed David to be the first to respond to a new home listing Waterloo, which he then rented!</p>
+              <p>The project consists of two main parts, Data Collection, and the Data Presentation.</p>
+              <h3 className='h4'>Data Collection</h3>
+              <p>Data collection is performed by a Python script which is scheduled to run every 5 minutes as a Google Cloud function. It checks 3 rental listing sites for houses matching David’s family needs, normalizes their data,  then stores any new listings in a Firestore database. If there were new listings, the script then sends a text message to him via the Twilio API with the number of new listings and their sources.</p>
+              <h3 className='h4'>Data Presentation</h3>
+              <p>The presentation is this NextJS site, hosted on Firebase. It taps into the Firestore collection of listings and displays the 30 most recently found listings.</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
