@@ -1,13 +1,42 @@
-"use client"
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import {BsInfoCircleFill, BsGearFill} from 'react-icons/bs';
-import {BiSolidLogIn, BiSolidLogOut} from 'react-icons/bi'
+import {BiSolidLogIn, BiSolidLogOut, BiSolidHome} from 'react-icons/bi'
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from 'src/components/Firebase';
 
 import s from "./Navigation.module.css";
 import cs from "src/styles/common.module.css";
 
 export default function Navigation() {
+  const [uid, setUid] = useState(null)
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // ...
+          console.log("uid", uid)
+          setUid(uid)
+        } else {
+          // User is signed out
+          // ...
+          console.log("user is logged out")
+          setUid(null)
+        }
+      });   
+  }, []);
+
+	const logout  = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut(auth)
+    } catch (err) {
+      console.log('Error logging out', err)
+    }
+	} 
+
   const router = useRouter()
   return (
     <>
@@ -33,8 +62,12 @@ export default function Navigation() {
             <ul className="navbar-nav">
               <li className="nav-item">
               {router.asPath !== '/' ? (
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/">
-                  <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} />
+                <a 
+                  className={`nav-link grow ${s.navItem} ${cs.grow}`} 
+                  href="/" 
+                  aria-label='home'
+                  title="Home">
+                  <BiSolidHome size={25} className={`mx-2 d-lg-block d-none`} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Home
                   </span>
@@ -42,6 +75,8 @@ export default function Navigation() {
                 ) : 
                 <button 
                   type="button"
+                  aria-label='Info'
+                  title="Info"
                   data-bs-toggle="modal"
                   data-bs-target="#infoModal"
                   style={{background: 'none', border: 'none'}}
@@ -55,7 +90,11 @@ export default function Navigation() {
                 }
               </li>
               <li className="nav-item">
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/settings">
+                <a 
+                  className={`nav-link grow ${s.navItem} ${cs.grow}`} 
+                  href="/settings" 
+                  aria-label='settings'
+                  title="Settings">
                   <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Settings
@@ -63,12 +102,28 @@ export default function Navigation() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/login">
+                {uid ? (
+                  <button 
+                  type="button"
+                  aria-label="Logout"
+                  title="Logout"
+                  onClick={logout}
+                  style={{background: 'none', border: 'none'}}
+                  className={`nav-link grow ${s.navItem} ${cs.grow} w-100`} 
+                  >
+                  <BiSolidLogOut size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
+                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                    Logout
+                  </span>
+                </button>  
+                ) : (
+                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/login" aria-label='Login'>
                   <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Login
                   </span>
                 </a>
+                )}
               </li>
             </ul>
           </div>
