@@ -9,7 +9,6 @@ import cs from "src/styles/common.module.css";
 
 export default function Navigation() {
   const router = useRouter()
-  console.log(router.asPath)
   return (
     <>
       <div
@@ -48,7 +47,7 @@ export default function Navigation() {
                   style={{background: 'none', border: 'none'}}
                   className={`nav-link grow ${s.navItem} ${cs.grow} w-100`} 
                   >
-                  <BsInfoCircleFill size={25} className={`mx-2 d-lg-block d-none`} />
+                  <BsInfoCircleFill size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Info
                   </span>
@@ -57,7 +56,7 @@ export default function Navigation() {
               </li>
               <li className="nav-item">
                 <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/settings">
-                  <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} />
+                  <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Settings
                   </span>
@@ -65,7 +64,7 @@ export default function Navigation() {
               </li>
               <li className="nav-item">
                 <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/login">
-                  <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} />
+                  <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Login
                   </span>
