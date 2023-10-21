@@ -20,7 +20,7 @@ export default function Footer() {
               />
             </a>
             <div className="d-flex flex-column justify-content-center align-items-start">
-              <span class="text-muted">
+              <span className="text-muted">
                 © {new Date().getFullYear()} {c.siteName}, all rights reserved
               </span>
             </div>

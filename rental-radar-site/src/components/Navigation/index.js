@@ -89,6 +89,7 @@ export default function Navigation() {
                 </button>
                 }
               </li>
+              { uid ? (
               <li className="nav-item">
                 <a 
                   className={`nav-link grow ${s.navItem} ${cs.grow}`} 
@@ -101,6 +102,7 @@ export default function Navigation() {
                   </span>
                 </a>
               </li>
+              ) : null}
               <li className="nav-item">
                 {uid ? (
                   <button 
