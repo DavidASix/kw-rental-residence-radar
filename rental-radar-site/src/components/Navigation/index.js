@@ -10,6 +10,8 @@ import cs from "src/styles/common.module.css";
 
 export default function Navigation() {
   const [uid, setUid] = useState(null)
+  const router = useRouter()
+
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -32,12 +34,12 @@ export default function Navigation() {
     e.preventDefault();
     try {
       await signOut(auth)
+      router.push('/')
     } catch (err) {
       console.log('Error logging out', err)
     }
 	} 
 
-  const router = useRouter()
   return (
     <>
       <div
@@ -119,7 +121,11 @@ export default function Navigation() {
                   </span>
                 </button>  
                 ) : (
-                <a className={`nav-link grow ${s.navItem} ${cs.grow}`} href="/login" aria-label='Login'>
+                <a 
+                  className={`nav-link grow ${s.navItem} ${cs.grow}`} 
+                  href="/login" 
+                  aria-label='Login'
+                  title='Login'>
                   <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
                   <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Login
