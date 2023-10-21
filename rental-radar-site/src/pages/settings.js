@@ -16,8 +16,9 @@ export default function Login() {
 	const router = useRouter();
   const [uid, setUid] = useState(null)
 	const [loading, setLoading] = useState(true);
-	const [houseTypeBools, setHouseTypeBools] = useState(Object.fromEntries(Object.keys(houseTypes).map(key => [key, false])));
-	const [smsEnabled, setSmsEnabled] = useState(false);
+	const [houseTypeBools, setHouseTypeBools] = useState(Object.fromEntries(Object.keys(houseTypes).map(key => [key, true])));
+	const [smsEnabled, setSmsEnabled] = useState(true);
+	const [rentMaxPrice, setRentMaxPrice] = useState(1000);
 
   useEffect(()=>{
     onAuthStateChanged(auth, (user) => {
@@ -38,12 +39,17 @@ export default function Login() {
   }, []);
 
 	const houseButtonClick = (house) => {
+		// TODO: Add in Firebase user profile update
 		setHouseTypeBools({...houseTypeBools, [house]: !houseTypeBools?.[house]})
 	}
 	const enableSmsClick = () => {
+		// TODO: Add in Firebase user profile update
 		setSmsEnabled(!smsEnabled);
 	}
-
+	const rentRangeOnChange = ({target}) => {
+		// TODO: Add in Firebase user profile update
+		setRentMaxPrice(target.value)
+	}
 	const loadingSwitch = () => {
 		if (loading) {
 			return <Loader color='var(--primary)' size={100} center />;
@@ -84,6 +90,22 @@ export default function Login() {
 							</label>
 						</div>
 					))}
+					<span className='h5 text-start mt-5'>
+						What's your maximum rent price?
+					</span>
+					<span className='headerFont text-end'>${rentMaxPrice}.00/month</span>
+					<input 
+						type="range" 
+						className="form-range" 
+						min="100" 
+						max="10000" 
+						step="100" 
+						value={rentMaxPrice} 
+						onChange={rentRangeOnChange} />
+					<div className='d-flex flex-row justify-content-between'>
+						<small>$100</small>
+						<small>$10,000</small>
+					</div>
 				</div>
 			</div>
 		</section>
