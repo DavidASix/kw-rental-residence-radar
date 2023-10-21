@@ -5,14 +5,8 @@ import cs from "src/styles/common.module.css";
 
 import NavigationLayout from 'src/components/NavigationLayout/';
 
-
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
-
-
-import firebaseConfig from 'src/assets/firebase-config.json';
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { db } from "src/components/Firebase";
 
 async function getInitialListings() {
   const listingsCollection = collection(db, 'listings');
