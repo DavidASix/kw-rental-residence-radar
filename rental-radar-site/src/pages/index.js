@@ -65,7 +65,7 @@ export default function Home(props) {
       </Head>
       <NavigationLayout>
         <section 
-          className={`py-md-5 py-3 w-100 row justify-content-center align-content-center text-center`}
+          className={`py-md-5 py-3 w-100 row position-relative justify-content-center align-content-center text-center`}
           style={{zIndex: 0}}>
           <h1 className='display-2' style={{zIndex: 10}}>
             KW Rental Radar
@@ -76,7 +76,6 @@ export default function Home(props) {
           <RadarScanner 
             size={300} 
             color={`#5D774A`} 
-            className={`d-lg-flex d-none`}
             style={{ position: 'absolute', top: -25, right: 'calc(25% - 150px)', zIndex: 0}} />
         </section>
         <section 

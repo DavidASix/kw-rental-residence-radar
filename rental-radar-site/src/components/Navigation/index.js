@@ -48,7 +48,7 @@ export default function Navigation() {
         <nav
           className={`navbar navbar-expand-lg navbar-light pb-0`}>
           <button
-            className="navbar-toggler border m-1 w-100"
+            className="navbar-toggler border m-1 w-100 bg-light"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navBarContent"
@@ -70,7 +70,7 @@ export default function Navigation() {
                   aria-label='home'
                   title="Home">
                   <BiSolidHome size={25} className={`mx-2 d-lg-block d-none`} />
-                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                  <span className='btn btn-dark w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Home
                   </span>
                 </a>
@@ -85,7 +85,7 @@ export default function Navigation() {
                   className={`nav-link grow ${s.navItem} ${cs.grow} w-100`} 
                   >
                   <BsInfoCircleFill size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
-                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                  <span className='btn btn-dark w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Info
                   </span>
                 </button>
@@ -99,7 +99,7 @@ export default function Navigation() {
                   aria-label='settings'
                   title="Settings">
                   <BsGearFill size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
-                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                  <span className='btn btn-dark w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Settings
                   </span>
                 </a>
@@ -116,7 +116,7 @@ export default function Navigation() {
                   className={`nav-link grow ${s.navItem} ${cs.grow} w-100`} 
                   >
                   <BiSolidLogOut size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
-                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                  <span className='btn btn-dark w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Logout
                   </span>
                 </button>  
@@ -127,7 +127,7 @@ export default function Navigation() {
                   aria-label='Login'
                   title='Login'>
                   <BiSolidLogIn size={25} className={`mx-2 d-lg-block d-none`} style={{fill: 'var(--dark)'}} />
-                  <span className='btn btn-outline-primary w-100 h4 headerFont m-0 d-lg-none d-block'>
+                  <span className='btn btn-dark w-100 h4 headerFont m-0 d-lg-none d-block'>
                     Login
                   </span>
                 </a>
