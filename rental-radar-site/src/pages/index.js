@@ -4,6 +4,7 @@ import s from "src/pages/home.module.css";
 import cs from "src/styles/common.module.css";
 
 import NavigationLayout from 'src/components/NavigationLayout/';
+import RadarScanner from 'src/components/RadarScanner';
 
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from "src/components/Firebase";
@@ -63,13 +64,24 @@ export default function Home(props) {
       <Head>
       </Head>
       <NavigationLayout>
-        <section className={`py-md-5 py-3 w-100 row justify-content-center align-content-center text-center`}>
-          <h1 className='display-2'>KW Rental Radar</h1>
-          <p className='h4 mt-4'>
-            Finding a house in KW is difficult. Hopefully this makes it a bit easier.
+        <section 
+          className={`py-md-5 py-3 w-100 row justify-content-center align-content-center text-center`}
+          style={{zIndex: 0}}>
+          <h1 className='display-2' style={{zIndex: 10}}>
+            KW Rental Radar
+          </h1>
+          <p className='h4 mt-4' style={{zIndex: 10}}>
+            Finding a house in the KW is difficult. Make it easier with rental radar.
           </p>
+          <RadarScanner 
+            size={300} 
+            color={`#5D774A`} 
+            className={`d-lg-flex d-none`}
+            style={{ position: 'absolute', top: -25, right: 'calc(25% - 150px)', zIndex: 0}} />
         </section>
-        <section className={`w-100 row justify-content-center align-content-center p-0 m-0`}>
+        <section 
+          className={`w-100 row justify-content-center align-content-center p-0 m-0`}
+          style={{zIndex: 10}}>
           <div className='row col-lg-10 col-12 p-0 py-2'>
             {props.listings.map((l, i) => <Listing key={i} listing={l} />)}
           </div>
