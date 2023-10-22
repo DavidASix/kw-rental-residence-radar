@@ -11,14 +11,14 @@ with open(secret_path, "r") as f:
     account_sid = secrets['accountSid']
     auth_token  = secrets['authToken']
     from_number = secrets['phoneNumber']
-    to_numbers =  secrets['to']
+    fail_to_number =  secrets['fail_to_number']
 
-def send_text(message_body):
+def send_text(message_body, to=fail_to_number):
     print('Sending Twilio Text')
     client = Client(account_sid, auth_token)
     try:
         message = client.messages.create(
-            to=to_numbers, 
+            to=to, 
             from_=from_number,
             body=message_body)
         print('Text Sent. SID:', message.sid)

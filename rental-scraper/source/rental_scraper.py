@@ -41,8 +41,10 @@ def main():
         print(message_text, '\n\n')
     except Exception as e:
         twilio.send_text('Message Prep Error:' + str(e))
-
-    twilio.send_text(message_text)
+    # Get array of users phone numbers on the mailing list
+    numbers = firebase.get_all_enabled_phone_numbers()
+    if len(numbers):
+        twilio.send_text(message_text, numbers)
 
 if __name__ == '__main__':
     main()

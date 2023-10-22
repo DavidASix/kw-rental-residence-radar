@@ -63,3 +63,22 @@ def delete_listings_from_source(source):
     for l in listings:
         l.reference.delete()
     print('Complete')
+
+#######################################
+##
+##      User Specific Functions
+##
+#######################################
+
+def get_all_enabled_phone_numbers():
+    db = firebase_conn()
+    users_collection = db.collection("users")
+    query = (users_collection
+        .select(['phoneNumber'])
+        .where("phoneNumber", ">=", '')
+        .where("smsEnabled", "==", True))
+    docs = query.get()
+    data = []
+    for doc in docs:
+        data.append(doc.to_dict()['phoneNumber'])
+    return data
