@@ -4,29 +4,40 @@ import { useRouter } from 'next/router'
 import { onAuthStateChanged,  } from "firebase/auth";
 import NavigationLayout from 'src/components/NavigationLayout/';
 import Loader from 'src/components/Loader/';
-import { auth } from 'src/components/Firebase';
+import { auth, db } from 'src/components/Firebase';
+import { collection, doc, getDoc, setDoc, orderBy, limit } from 'firebase/firestore';
 
 const houseTypes = {
 	detached: 'Detached', 
 	multi: 'Multi-Unit', 
 	townhouse: 'Townhouse',
 };
+const defaultHouseTypeBools = Object.fromEntries(Object.keys(houseTypes).map(key => [key, true]));
+const defaultSettingsState = {
+	smsEnabled: false, 
+	rentMaxPrice: 1000, 
+	houseTypeBools: defaultHouseTypeBools
+};
 
 export default function Login() {
 	const router = useRouter();
   const [uid, setUid] = useState(null)
 	const [loading, setLoading] = useState(true);
-	const [houseTypeBools, setHouseTypeBools] = useState(Object.fromEntries(Object.keys(houseTypes).map(key => [key, true])));
+	const [houseTypeBools, setHouseTypeBools] = useState(defaultHouseTypeBools);
 	const [smsEnabled, setSmsEnabled] = useState(true);
 	const [rentMaxPrice, setRentMaxPrice] = useState(1000);
 
   useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (user) {
           const uid = user.uid;
-          console.log("uid", uid)
           setUid(uid)
-					// TODO: Write a "Set user state" function to get the state from the server and set initial state
+					// Initialize base stat based on users current serverside state
+					try {
+						await getUserSettings(uid);
+					} catch (err) {
+						console.log('Could not get initial Settings')
+					}
 					setLoading(false)
         } else {
           // User is signed out
@@ -38,6 +49,29 @@ export default function Login() {
       });
   }, []);
 
+	const getUserSettings = (uid) => new Promise(async (resolve, reject) => {
+		try {
+			const usersCollection = collection(db, 'users');
+			const userDocRef = doc(usersCollection, uid)
+			const userDocSnap = await getDoc(userDocRef);
+			if (userDocSnap.exists()) {
+				// Document exists, you can access its data
+				const userData = userDocSnap.data();
+				setHouseTypeBools({ ...userData?.houseTypeBools });
+				setSmsEnabled(userData?.smsEnabled);
+				setRentMaxPrice(userData?.rentMaxPrice)
+				console.log(userData);
+			} else {
+				await setDoc(userDocRef, defaultSettingsState)
+			}
+			return resolve(true);
+		} catch (err) {
+			console.error('Could not get user settings', err.message)
+			return reject(err.message);
+		}
+	});
+
+	
 	const houseButtonClick = (house) => {
 		// TODO: Add in Firebase user profile update
 		setHouseTypeBools({...houseTypeBools, [house]: !houseTypeBools?.[house]})
