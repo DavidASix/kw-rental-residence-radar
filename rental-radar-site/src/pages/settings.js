@@ -5,7 +5,7 @@ import { onAuthStateChanged,  } from "firebase/auth";
 import NavigationLayout from 'src/components/NavigationLayout/';
 import Loader from 'src/components/Loader/';
 import { auth, db } from 'src/components/Firebase';
-import { collection, doc, getDoc, setDoc, orderBy, limit } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 const houseTypes = {
 	detached: 'Detached', 
@@ -18,6 +18,8 @@ const defaultSettingsState = {
 	rentMaxPrice: 1000, 
 	houseTypeBools: defaultHouseTypeBools
 };
+
+var rentRangeTimeout;
 
 export default function Login() {
 	const router = useRouter();
@@ -72,18 +74,51 @@ export default function Login() {
 	});
 
 	
-	const houseButtonClick = (house) => {
-		// TODO: Add in Firebase user profile update
-		setHouseTypeBools({...houseTypeBools, [house]: !houseTypeBools?.[house]})
+	const houseButtonClick = async (house) => {
+		const newHouseObj = {...houseTypeBools, [house]: !houseTypeBools?.[house]}
+		try {
+			const userDocRef = doc(db, 'users', uid);
+			await updateDoc(userDocRef, {houseTypeBools: newHouseObj})
+			setHouseTypeBools({...houseTypeBools, [house]: !houseTypeBools?.[house]})
+		} catch (err) {
+			console.log(err)
+			window.alert('Could not update server', err.message);
+		}
 	}
-	const enableSmsClick = () => {
-		// TODO: Add in Firebase user profile update
-		setSmsEnabled(!smsEnabled);
+
+	const enableSmsClick = async () => {
+		try {
+			const userDocRef = doc(db, 'users', uid);
+			await updateDoc(userDocRef, {smsEnabled: !smsEnabled})
+			setSmsEnabled(!smsEnabled);
+		} catch (err) {
+			console.log(err)
+			window.alert('Could not update server', err.message);
+		}
 	}
+
 	const rentRangeOnChange = ({target}) => {
-		// TODO: Add in Firebase user profile update
-		setRentMaxPrice(target.value)
+		const newPrice = target.value;
+		setRentMaxPrice(newPrice)
+		
+		// Clear any previous timeouts to prevent multiple calls
+		if (rentRangeTimeout) {
+			clearTimeout(rentRangeTimeout);
+		}
+		
+		// Set a new timeout for the Firebase call
+		const timeoutDelay = 500;
+		rentRangeTimeout = setTimeout(async () => {
+			try {
+				const userDocRef = doc(db, 'users', uid);
+				await updateDoc(userDocRef, { rentMaxPrice: newPrice });
+			} catch (err) {
+				console.log(err);
+				window.alert('Could not update server', err.message);
+			}
+		}, timeoutDelay);
 	}
+
 	const loadingSwitch = () => {
 		if (loading) {
 			return <Loader color='var(--primary)' size={100} center />;
