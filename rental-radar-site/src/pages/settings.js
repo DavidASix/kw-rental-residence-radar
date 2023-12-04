@@ -21,7 +21,7 @@ const defaultSettingsState = {
 
 var rentRangeTimeout;
 
-export default function Login() {
+export default function Settings() {
 	const router = useRouter();
   const [uid, setUid] = useState(null)
 	const [loading, setLoading] = useState(true);
