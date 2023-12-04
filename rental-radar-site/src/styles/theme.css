@@ -1,12 +1,15 @@
 :root {
   --nav-height: 70px;
   --white: #FFFFFF;
-  --primary: #477a62;
-  --secondary: #a5bb85;
-  --fg: #252525;
-  --fg-muted: #666666;
-  --background: #F8f8f8;
-  --modal-bg: #eeeeee;
+  --primary: #E4B14E;
+  --secondary: #E15C12;
+  --tretiary: #A17CDC;
+  --success: #2C9636;
+  --danger: #962C2C;
+  --dark: #252525;
+  --light: #F4F3F3;
+  --muted: #666666;
+  --modal: #F1E0CD;
 }
 
 /*

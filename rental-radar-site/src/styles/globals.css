@@ -1,42 +1,39 @@
 * {
   font-weight: 400;
   font-size: inherit;
-  font-family: 'Martel Sans', sans-serif;
-  color: var(--fg);
+  font-family: 'Sofia Sans', sans-serif;
+  color: var(--dark);
 }
 
 html, body {
   margin: 0px;
   padding: 0px;
   height: 100%;
-  background-color: 'var(--white)';
+  background-color: var(--light);
 }
 
-h1 {
-  font-family: 'Bungee', cursive;
+.header {
+  font-weight: 700;
 }
 
-.headerFont {
-  font-family: 'Bungee', cursive;
-}
-.heavyFont {
-  font-family: 'Martel Sans', sans-serif;
+.heavy {
   font-weight: 900;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 400;
   margin: 0px;
+  padding: 0px;
 }
 
-
-a {
-  text-decoration: none;
-  color: var(--fg-muted);
+.gradient-light {
+  background: rgb(241,224,205);
+  background: linear-gradient(180deg, rgba(241,224,205,1) 0%, rgba(253,246,239,1) 100%);
 }
-a:hover {
-  color: var(--fg);
+.gradient-accent {
+  background: rgb(225,92,18);
+  background: linear-gradient(90deg, rgba(225,92,18,1) 0%, rgba(161,124,220,1) 100%);
 }
-
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.025); }
+.gradient-accent-muted {
+  background: rgb(212,194,160);
+  background: linear-gradient(135deg, rgba(212,194,160,1) 0%, rgba(208,215,238,1) 100%);
+}
