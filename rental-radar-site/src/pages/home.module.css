@@ -1,0 +1,8 @@
+.hero {
+    min-height: calc(95vh - var(--nav-height));
+}
+
+.issueOutline {
+    min-height: 30vh;
+    margin-top: 0vh;
+}
