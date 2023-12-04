@@ -35,16 +35,11 @@
 }
 
 .frosted {
-  background-color: rgba(252, 252, 252, .65);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background-color: rgba(252, 252, 252, .45);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
   /*border: 0.5px #FFFFFF30 solid;*/
 }
-
-[data-theme="light"] .frosted {
-  background-color: rgba(252, 252, 252, .30);
-}
-  
 
 .page {
   min-height: calc(100vh - var(--nav-height) - 120px);

@@ -43,7 +43,7 @@ export default function Navigation() {
   return (
     <>
       <div
-        style={{ backgroundColor: 'var(--modal)'}}
+        style={{ backgroundColor: 'var(--gradient-light-start)'}}
         className={`container-fluid align-items-center `}
       >
         <nav

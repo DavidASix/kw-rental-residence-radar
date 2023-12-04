@@ -10,8 +10,9 @@
   --light: #fefaf6;
   --muted: #666666;
   --modal: #fcf4ec;
-
-  --gradient-light-stop: #F6E8DA;
+  
+  --gradient-light-start: rgba(246,232,218,1);
+  --gradient-light-stop: rgba(252,244,236,1);
 }
 
 /*

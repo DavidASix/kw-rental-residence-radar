@@ -10,6 +10,7 @@ html, body {
   padding: 0px;
   height: 100%;
   background-color: var(--light);
+  scrollbar-color: var(--secondary) var(--primary);
 }
 
 .header {
@@ -27,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .gradient-light {
   background: rgb(241,224,205);
-  background: linear-gradient(180deg, rgba(246,232,218,1) 0%, rgba(252,244,236,1) 100%);
+  background: linear-gradient(180deg, var(--gradient-light-start) 0%, var(--gradient-light-stop) 100%);
 }
 .gradient-accent {
   background: rgb(225,92,18);
