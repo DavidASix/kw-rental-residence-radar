@@ -21,7 +21,14 @@ html, body {
   font-weight: 900;
 }
 
-h1, h2, h3, h4, h5, h6 {
+span, b, strong, i, em, mark, small, del, ins, sub, sup, s {
+  color: inherit;
+  font-family: inherit;
+  margin: inherit;
+  padding: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p {
   margin: 0px;
   padding: 0px;
 }
