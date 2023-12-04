@@ -33,7 +33,7 @@ const StatCard = ({title, statArray, arrowColor, arrowUp }) => {
   const Arrow = arrowColor === 'green' ? MetricArrowGreen : MetricArrowRed;
   return (
   <div className={`col-lg-4 p-1 p-lg-2 px-xxl-5`} style={{height: 275}}>
-    <div className={`${cs.frosted} d-flex flex-column rounded-4 p-3 position-relative align-content-start h-100 w-100`}>
+    <div className={`${cs.frosted} shadow-sm d-flex flex-column rounded-4 p-3 position-relative align-content-start h-100 w-100`}>
       <h2 className=''>
         {title()}
       </h2>
@@ -87,9 +87,47 @@ export default function Home(props) {
         <section className={`${s.issueOutline} col-12 position-relative row justify-content-center gradient-accent-muted`}
           style={{zIndex: 15}}>
           <TopSeperator style={{position: 'absolute', fill: 'var(--gradient-light-stop)', padding: 0 }} />
-          <div className='col-9 row' style={{marginTop: '-5vh'}}>
+          <div className='col-9 row pb-3' style={{marginTop: '-5vh'}}>
             {stats.map((stat, i) => <StatCard {...stat} key={i} />)}
           </div>
+
+          <div className='col-9 row py-4'>
+            <h3 className='display-4 '>
+              Nowadays it's not enough to be a <span className='header'>good</span> applicant;<br/>
+              You have to be a <span className='header'>fast</span> applicant.
+            </h3>
+          </div>
+
+          <div className='col-9 row py-4 mb-4'>
+            <div className={`${cs.frosted} shadow-sm rounded-4 w-100 row`}>
+              <div className='col-7 row ps-4 py-5'>
+                <p className='h4 mb-4'>
+                  KW rental agency operate on a first come, first serve basis when showing new houses. If the first applicant is a good one, they’ll stop the search.
+                </p>
+                <p className='h4'>
+                  Getting notifications as soon as a house goes on the rental market is your competitive edge to getting a new house.
+                </p>
+              </div>
+              <div className='col-5 position-relative d-flex justify-content-center overflow-hidden'>
+                <div 
+                  className='rounded-top-5 shadow px-4 pt-4'
+                  style={{width: '95%', maxWidth: 450, height: '90%', position: 'absolute', bottom: 0, backgroundColor: '#d9d9d9'}}>
+                  {[1, 6, 11, 16].map((min, i) => (
+                    <div className='row pb-1' key={i}>
+                      <div className='rounded-top-4 rounded-start-4 py-1' style={{ backgroundColor: '#6594DA'}}>
+                        <span className='text-white h2 p-0'>
+                          {Math.floor(Math.random() * 10) + 4} new houses available!
+                        </span>
+                      </div>
+                      <span className='text-end p-0'>{min} min ago</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <TopSeperator style={{fill: 'var(--gradient-light-stop)', padding: 0, transform: 'rotate(180deg)scaleX(-1)'}} />
         </section>
 
       </NavigationLayout>
