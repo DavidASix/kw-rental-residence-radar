@@ -7,9 +7,11 @@
   --success: #2C9636;
   --danger: #962C2C;
   --dark: #252525;
-  --light: #F4F3F3;
+  --light: #fefaf6;
   --muted: #666666;
-  --modal: #F1E0CD;
+  --modal: #fcf4ec;
+
+  --gradient-light-stop: #F6E8DA;
 }
 
 /*

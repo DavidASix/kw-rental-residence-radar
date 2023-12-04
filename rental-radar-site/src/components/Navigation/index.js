@@ -43,6 +43,7 @@ export default function Navigation() {
   return (
     <>
       <div
+        style={{ backgroundColor: 'var(--modal)'}}
         className={`container-fluid align-items-center `}
       >
         <nav
@@ -137,6 +138,7 @@ export default function Navigation() {
           </div>
         </nav>
       </div>
+
       <div className="modal fade" id="infoModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="infoModal">
           <div className="modal-content">

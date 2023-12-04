@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .gradient-light {
   background: rgb(241,224,205);
-  background: linear-gradient(180deg, rgba(241,224,205,1) 0%, rgba(253,246,239,1) 100%);
+  background: linear-gradient(180deg, rgba(246,232,218,1) 0%, rgba(252,244,236,1) 100%);
 }
 .gradient-accent {
   background: rgb(225,92,18);
